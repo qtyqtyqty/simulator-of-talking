@@ -1,7 +1,7 @@
 # simulator-of-talking
 332/331 group project by qty and loonaraxo
 
-Краткий пример работы системы MVP
+Краткий пример работы системы ~MVP
 
 1. Вход в игру (The "Hook"):
 
