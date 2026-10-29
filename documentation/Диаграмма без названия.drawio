@@ -1,0 +1,206 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Страница-1" id="OLH0KMVpuaAWCMqJ4E9H">
+    <mxGraphModel dx="5033" dy="4270" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title-core" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#1a237e;" value="1. ЯДРО СИСТЕМЫ (main.js + Phaser)" vertex="1">
+          <mxGeometry height="40" width="640" x="40" y="-160" as="geometry" />
+        </mxCell>
+        <mxCell id="class-game" parent="1" style="swimlane;html=1;startSize=40;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;Game&lt;/b&gt;&lt;br&gt;&lt;i&gt;Phaser.Game&lt;/i&gt;&lt;hr&gt;+ config: GAME_CONFIG&lt;br&gt;+ registry: Phaser.Registry&lt;br&gt;+ scene: SceneManager&lt;hr&gt;+ boot(): void" vertex="1">
+          <mxGeometry height="180" width="320" x="-10" y="-100" as="geometry" />
+        </mxCell>
+        <mxCell id="class-config" parent="1" style="swimlane;html=1;startSize=26;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;GAME_CONFIG&lt;/b&gt;&lt;hr&gt;dialogCost: 5&lt;br&gt;lonelinessDriftIntervalMs: 20000&lt;br&gt;interactRadius: 160&lt;br&gt;lonelinessWinReward: 10" vertex="1">
+          <mxGeometry height="180" width="300" x="640" y="-200" as="geometry" />
+        </mxCell>
+        <mxCell id="class-registry" parent="1" style="swimlane;html=1;startSize=40;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;Registry&lt;/b&gt;&lt;br&gt;&lt;i&gt;Phaser.Data.DataManager&lt;/i&gt;&lt;hr&gt;+ currency: number&lt;br&gt;+ loneliness: number&lt;br&gt;+ socialBattery: number&lt;br&gt;+ relationship_nikolai: number&lt;br&gt;+ relationship_police: number&lt;br&gt;+ deck_shared: string[]&lt;br&gt;+ stash_shared: string[]&lt;br&gt;+ nikolai_memory: MemoryState&lt;br&gt;+ police_memory: MemoryState&lt;br&gt;+ dialogActive: boolean&lt;br&gt;+ battery_frozen: boolean&lt;br&gt;+ lift_unlocked: boolean&lt;hr&gt;+ get(key): any&lt;br&gt;+ set(key, value): void&lt;br&gt;+ events: EventEmitter" vertex="1">
+          <mxGeometry height="340" width="360" x="910" y="-55" as="geometry" />
+        </mxCell>
+        <mxCell id="class-scene-abstract" parent="1" style="swimlane;html=1;startSize=40;fillColor=#f5f5f5;strokeColor=#666666;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;dashed=1;" value="&lt;b&gt;Phaser.Scene&lt;/b&gt;&lt;br&gt;&lt;i&gt;abstract&lt;/i&gt;&lt;hr&gt;+ create(): void&lt;br&gt;+ update(time, delta): void" vertex="1">
+          <mxGeometry height="120" width="320" x="230" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="class-preload" parent="1" style="swimlane;html=1;startSize=26;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;PreloadScene&lt;/b&gt;&lt;hr&gt;+ preload(): void&lt;br&gt;+ create(): void&lt;br&gt;+ loadFrameSequence(): void&lt;br&gt;+ createSequenceAnim(): void&lt;br&gt;+ generatePokeballTexture(): void&lt;br&gt;+ generateItemTextures(): void&lt;br&gt;+ generateNikolaiPortraitTexture(): void" vertex="1">
+          <mxGeometry height="200" width="320" x="-190" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="class-world" parent="1" style="swimlane;html=1;startSize=26;fillColor=#ffe6cc;strokeColor=#d79b00;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;WorldScene&lt;/b&gt;&lt;hr&gt;- player, nikolai, police: Sprite&lt;br&gt;- cfg, memory, registry&lt;br&gt;- hudElements: Array&lt;br&gt;- lonelinessBar, currencyText&lt;br&gt;- depthLayer: 1 | 2&lt;br&gt;- shopItemCards, shopElements&lt;hr&gt;+ create(), update()&lt;br&gt;+ buildEnvironment(), buildCharacters()&lt;br&gt;+ buildCamera(), buildHud()&lt;br&gt;+ buildShopOverlay(), buildCoinPickup()&lt;br&gt;+ handleMovement(), handleInteraction()&lt;br&gt;+ tryStartDialog(), tryOpenShop()&lt;br&gt;+ updateCameraFeel(), updateCoinPickup()&lt;br&gt;+ updateDepthPortal(), updateCompanion()&lt;br&gt;+ applyDepth(), depthScale(), depthFraction()&lt;br&gt;+ buyItem(), getSharedDeck()&lt;br&gt;+ onDialogClosed()" vertex="1">
+          <mxGeometry height="440" width="360" x="40" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="class-dialog" parent="1" style="swimlane;html=1;startSize=26;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;DialogScene&lt;/b&gt;&lt;hr&gt;- characterKey: &#39;nikolai&#39; | &#39;police&#39; | &#39;tower&#39;&lt;br&gt;- character: Character&lt;br&gt;- memory: MemoryState&lt;br&gt;- currentMood, moodTagModifiers&lt;br&gt;- cardObjects: Card[]&lt;br&gt;- phrasesPool, deck, drawPile, discardPile&lt;br&gt;- currentThreshold: number&lt;br&gt;- batteryBar, relBarUi, progressParts&lt;br&gt;- comboSlot, comboModeActive&lt;hr&gt;+ create(), update()&lt;br&gt;+ buildBackground(), buildVitalsRow()&lt;br&gt;+ buildSpeechArea(), buildComboStrip()&lt;br&gt;+ populateCards(), createCard()&lt;br&gt;+ onCardDragStart/Drag/DragEnd()&lt;br&gt;+ commitThrow(), applyOutcomeAndContinue()&lt;br&gt;+ resolveComboFling(), playPhraseMinigame()&lt;br&gt;+ buildRopeMinigame(), buildMazeMinigame()&lt;br&gt;+ setMood(), pickReactionLine()&lt;br&gt;+ offerInitiativeQuestion()&lt;br&gt;+ playFactoryStory(), showDraftScreen()&lt;br&gt;+ closeDialog()" vertex="1">
+          <mxGeometry height="440" width="360" x="450" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-preload-scene" edge="1" parent="1" source="class-preload" style="endArrow=block;endFill=0;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-scene-abstract">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-world-scene" edge="1" parent="1" source="class-world" style="endArrow=block;endFill=0;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-scene-abstract">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-dialog-scene" edge="1" parent="1" source="class-dialog" style="endArrow=block;endFill=0;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-scene-abstract">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-game-registry" edge="1" parent="1" source="class-game" style="endArrow=diamond;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-registry" value="*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-game-config" edge="1" parent="1" source="class-game" style="endArrow=diamond;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-config" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-game-scene" edge="1" parent="1" source="class-game" style="endArrow=diamond;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-scene-abstract" value="*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-world-registry" edge="1" parent="1" source="class-world" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-registry" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-dialog-registry" edge="1" parent="1" source="class-dialog" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-registry" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-world-dialog" edge="1" parent="1" source="class-world" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-dialog" value="launches">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-preload-world" edge="1" parent="1" source="class-preload" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-world" value="loads assets">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="title-data" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#1a237e;" value="2. СУЩНОСТИ ДАННЫХ (загружаются из JSON через PreloadScene)" vertex="1">
+          <mxGeometry height="40" width="900" x="880" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="class-character" parent="1" style="swimlane;html=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;Character&lt;/b&gt;&lt;br&gt;&lt;i&gt;characters.json → character&lt;/i&gt;&lt;hr&gt;+ name: string&lt;br&gt;+ starting_relationship: number&lt;br&gt;+ starting_deck: string[]&lt;br&gt;+ tag_values: Map&lt;string, number&gt;&lt;br&gt;+ threshold_escalates: boolean&lt;br&gt;+ lore_relationship: number&lt;br&gt;+ tutorial_flow: boolean&lt;br&gt;+ disable_portrait_hit: boolean&lt;br&gt;+ power_coeff_override?: number&lt;br&gt;+ special_abilities: Ability[]" vertex="1">
+          <mxGeometry height="280" width="320" x="1950" y="1170" as="geometry" />
+        </mxCell>
+        <mxCell id="class-phrase" parent="1" style="swimlane;html=1;startSize=26;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;Phrase&lt;/b&gt;&lt;br&gt;&lt;i&gt;phrases.json → phrases[]&lt;/i&gt;&lt;hr&gt;+ id: string&lt;br&gt;+ text: string&lt;br&gt;+ tag: string&lt;br&gt;+ kind: &#39;xob&#39; | &#39;spo&#39; | &#39;neutral&#39; | &#39;lore&#39;&lt;br&gt;+ power: number&lt;br&gt;+ value?: number&lt;br&gt;+ hint?: string&lt;br&gt;+ followup_text?: string&lt;br&gt;+ teaches?: string&lt;br&gt;+ reactions: Map&lt;characterKey, Reaction&gt;&lt;br&gt;+ animations?: AnimationSet" vertex="1">
+          <mxGeometry height="280" width="320" x="1770" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="class-item" parent="1" style="swimlane;html=1;startSize=26;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;Item&lt;/b&gt;&lt;br&gt;&lt;i&gt;DialogScene.ITEM_DEFS&lt;/i&gt;&lt;hr&gt;+ key: string&lt;br&gt;+ icon: string&lt;br&gt;+ tag: string&lt;br&gt;+ label: string&lt;br&gt;+ price: number&lt;br&gt;+ grantsPhrase: string&lt;br&gt;+ batteryRestore?: number&lt;br&gt;+ consumable?: boolean" vertex="1">
+          <mxGeometry height="220" width="300" x="2280" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="class-combodef" parent="1" style="swimlane;html=1;startSize=26;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;ComboDef&lt;/b&gt;&lt;br&gt;&lt;i&gt;phrases.json → combos[]&lt;/i&gt;&lt;hr&gt;+ tags: [string, string]&lt;br&gt;+ text: string&lt;br&gt;+ reactions: Map&lt;band, string[]&gt;&lt;br&gt;+ teaches?: string" vertex="1">
+          <mxGeometry height="180" width="320" x="1140" y="1020" as="geometry" />
+        </mxCell>
+        <mxCell id="class-memory" parent="1" style="swimlane;html=1;startSize=26;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;MemoryState&lt;/b&gt;&lt;br&gt;&lt;i&gt;Registry → *_memory&lt;/i&gt;&lt;hr&gt;+ last_player_tags: string[]&lt;br&gt;+ last_player_phrase_id: string&lt;br&gt;+ topics_discussed: string[]&lt;br&gt;+ lore_revealed: boolean&lt;br&gt;+ times_insulted: number&lt;br&gt;+ times_comforted: number&lt;br&gt;+ mini_choices_made: object[]&lt;br&gt;+ known_tag_values: Map&lt;string, number&gt;&lt;br&gt;+ taught_phrase_ids: string[]&lt;br&gt;+ silence_lore_bonus: number" vertex="1">
+          <mxGeometry height="280" width="320" x="1550" y="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="class-mood" parent="1" style="swimlane;html=1;startSize=26;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;EmotionalState&lt;/b&gt;&lt;br&gt;&lt;i&gt;phrases.json → emotional_states&lt;/i&gt;&lt;hr&gt;+ id: string&lt;br&gt;+ label: string&lt;br&gt;+ tint: color (MOOD_TINTS)" vertex="1">
+          <mxGeometry height="140" width="300" x="2120" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-dialog-character" edge="1" parent="1" source="class-dialog" style="endArrow=diamond;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-character" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-dialog-phrase" edge="1" parent="1" source="class-dialog" style="endArrow=diamond;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-phrase" value="*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-dialog-memory" edge="1" parent="1" source="class-dialog" style="endArrow=diamond;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-memory" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-dialog-combodef" edge="1" parent="1" source="class-dialog" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-combodef" value="*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-dialog-mood" edge="1" parent="1" source="class-dialog" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-mood" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-world-item" edge="1" parent="1" source="class-world" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-item" value="*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-item-phrase" edge="1" parent="1" source="class-item" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-phrase" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-combodef-phrase" edge="1" parent="1" source="class-combodef" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-phrase" value="2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="title-state" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#1a237e;" value="3. СОСТОЯНИЯ: переключение WorldScene ↔ DialogScene через Registry" vertex="1">
+          <mxGeometry height="40" width="900" x="40" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="state-world" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;" value="&lt;b&gt;WorldScene&lt;/b&gt;&lt;br&gt;&lt;i&gt;dialogActive = false&lt;/i&gt;&lt;br&gt;&lt;br&gt;Игрок ходит, магазин,&lt;br&gt;взаимодействие с NPC" vertex="1">
+          <mxGeometry height="120" width="260" x="120" y="1300" as="geometry" />
+        </mxCell>
+        <mxCell id="state-dialog" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="&lt;b&gt;DialogScene&lt;/b&gt;&lt;br&gt;&lt;i&gt;dialogActive = true&lt;/i&gt;&lt;br&gt;&lt;br&gt;Броски карт, диалог,&lt;br&gt;мини-игры, память" vertex="1">
+          <mxGeometry height="120" width="260" x="620" y="1300" as="geometry" />
+        </mxCell>
+        <mxCell id="state-registry-io" parent="1" style="swimlane;html=1;startSize=26;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;fontSize=12;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;Registry&lt;/b&gt;&lt;br&gt;&lt;i&gt;(обмен данными)&lt;/i&gt;&lt;hr&gt;+ socialBattery&lt;br&gt;+ currency&lt;br&gt;+ relationship_*&lt;br&gt;+ deck_shared&lt;br&gt;+ hasItem_*&lt;br&gt;+ *_memory&lt;br&gt;+ dialogActive" vertex="1">
+          <mxGeometry height="200" width="280" x="1020" y="1260" as="geometry" />
+        </mxCell>
+        <mxCell id="trans-start-dialog" edge="1" parent="1" source="state-world" style="html=1;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" target="state-dialog" value="tryStartDialog(characterKey)&lt;br&gt;[battery &gt;= dialogCost]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="trans-close-dialog" edge="1" parent="1" source="state-dialog" style="html=1;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" target="state-world" value="closeDialog()&lt;br&gt;[battery &lt;= 20% ИЛИ сюжет]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-world-registry-data" edge="1" parent="1" source="state-world" style="endArrow=classic;startArrow=classic;html=1;edgeStyle=orthogonalEdgeStyle;" target="state-registry-io" value="read/write">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-dialog-registry-data" edge="1" parent="1" source="state-dialog" style="endArrow=classic;startArrow=classic;html=1;edgeStyle=orthogonalEdgeStyle;" target="state-registry-io" value="read/write">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="title-assets" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#1a237e;" value="4. ASSET LOADER — что загружает PreloadScene" vertex="1">
+          <mxGeometry height="40" width="900" x="40" y="1560" as="geometry" />
+        </mxCell>
+        <mxCell id="asset-images" parent="1" style="swimlane;html=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;Sprites / Images&lt;/b&gt;&lt;hr&gt;player.png, nikolai.png&lt;br&gt;bg_l1_front, bg_l1_light_a/b&lt;br&gt;bg_l1_main, bg_l1_mid, bg_l1_far&lt;br&gt;bg_l2_main, bg_l2_light, bg_l2_far&lt;br&gt;button_bg, nameplate&lt;br&gt;dialog_panel, nikolai_ui_full&lt;br&gt;icons/Trash, Like, Dislike, Plus, Locked" vertex="1">
+          <mxGeometry height="220" width="300" x="40" y="1620" as="geometry" />
+        </mxCell>
+        <mxCell id="asset-spritesheets" parent="1" style="swimlane;html=1;startSize=26;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;Spritesheets&lt;/b&gt;&lt;hr&gt;impact_fx (48×48)&lt;br&gt;sparkle_fx (32×32)&lt;br&gt;&lt;br&gt;&lt;b&gt;Frame Sequences&lt;/b&gt; (&quot;vfx extra/&quot;)&lt;hr&gt;alert (14), coin (31), dimpact (7)&lt;br&gt;simpact (7), guide (12), pink (31)&lt;br&gt;poison (17)" vertex="1">
+          <mxGeometry height="220" width="300" x="360" y="1620" as="geometry" />
+        </mxCell>
+        <mxCell id="asset-json" parent="1" style="swimlane;html=1;startSize=26;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;JSON-данные&lt;/b&gt;&lt;hr&gt;characters.json&lt;br&gt;&amp;nbsp;&amp;nbsp;→ Character, tag_values,&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;starting_deck&lt;br&gt;&lt;br&gt;phrases.json&lt;br&gt;&amp;nbsp;&amp;nbsp;→ phrases[], combos[],&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;lore_phrases[], emotional_states,&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;initiative_questions, idle_actions" vertex="1">
+          <mxGeometry height="220" width="300" x="680" y="1620" as="geometry" />
+        </mxCell>
+        <mxCell id="asset-procedural" parent="1" style="swimlane;html=1;startSize=26;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;Процедурные текстуры&lt;/b&gt;&lt;hr&gt;pokeball, reload_icon, aim_crosshair&lt;br&gt;item_beer, item_headphones&lt;br&gt;item_noodles, item_knife, item_coffee&lt;br&gt;item_photo, item_trinket&lt;br&gt;nikolai_portrait, police_portrait&lt;br&gt;tower_portrait" vertex="1">
+          <mxGeometry height="220" width="300" x="1000" y="1620" as="geometry" />
+        </mxCell>
+        <mxCell id="asset-filters" parent="1" style="swimlane;html=1;startSize=26;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;" value="&lt;b&gt;Texture Filters&lt;/b&gt;&lt;hr&gt;LINEAR (сглаживание):&lt;br&gt;&amp;nbsp;bg_l1_*, bg_l2_*, icons,&lt;br&gt;&amp;nbsp;процедурные текстуры&lt;br&gt;&lt;br&gt;NEAREST (пиксель-арт):&lt;br&gt;&amp;nbsp;player, nikolai&lt;br&gt;&amp;nbsp;impact_fx, sparkle_fx&lt;br&gt;&amp;nbsp;vfx_*_N (все кадры)" vertex="1">
+          <mxGeometry height="220" width="300" x="1320" y="1620" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-preload-images" edge="1" parent="1" source="class-preload" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="asset-images">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-preload-json" edge="1" parent="1" source="class-preload" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="asset-json">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-preload-procedural" edge="1" parent="1" source="class-preload" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="asset-procedural">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-30" y="430" />
+              <mxPoint x="1150" y="430" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-preload-filters" edge="1" parent="1" source="class-preload" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="asset-filters">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-30" y="-220" />
+              <mxPoint x="1470" y="-220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-json-character" edge="1" parent="1" source="asset-json" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-character" value="parses to">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-json-phrase" edge="1" parent="1" source="asset-json" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-phrase" value="parses to">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-json-mood" edge="1" parent="1" source="asset-json" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-mood" value="parses to">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-json-combodef" edge="1" parent="1" source="asset-json" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-combodef" value="parses to">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-procedural-item" edge="1" parent="1" source="asset-procedural" style="endArrow=open;endFill=0;dashed=1;html=1;edgeStyle=orthogonalEdgeStyle;" target="class-item" value="provides icons">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="title-legend" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=18;fontStyle=1;fontColor=#1a237e;" value="ЛЕГЕНДА" vertex="1">
+          <mxGeometry height="30" width="200" x="1680" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;" value="→ Наследование (Phaser.Scene)" vertex="1">
+          <mxGeometry height="20" width="260" x="1680" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;" value="◆─ Композиция (Game содержит)" vertex="1">
+          <mxGeometry height="20" width="260" x="1680" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-3" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;" value="⇢ Использование (uses / dashed)" vertex="1">
+          <mxGeometry height="20" width="260" x="1680" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-4" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;" value="⇢ Данные JSON → сущности" vertex="1">
+          <mxGeometry height="20" width="260" x="1680" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-5" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;" value="⇢ Переход состояния (State Machine)" vertex="1">
+          <mxGeometry height="20" width="260" x="1680" y="260" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
